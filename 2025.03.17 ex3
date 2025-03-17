@@ -1,0 +1,11 @@
+void main() {
+  var input = '2025-03-11';
+
+  DateTime date = DateTime.parse(input);
+
+  List<String> days = ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'];
+
+  String nowday = days[date.weekday - 1];
+
+  print('$input의 요일은 $nowday 입니다.');
+}
