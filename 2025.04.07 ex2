@@ -1,0 +1,90 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  final List<String> buttons = [
+    '%', '√', 'x²', '1/x',
+    'MC', 'MR', 'M+', 'MS',
+    '7', '8', '9', '÷',
+    '4', '5', '6', '×',
+    '1', '2', '3', '-',
+    '0', '.', '=', '+',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'MyApp',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('MyApp'),
+          backgroundColor: Colors.black,
+        ),
+        backgroundColor: Colors.black,
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            final totalHeight = constraints.maxHeight;
+            final displayHeight = totalHeight * 0.3;
+            final buttonHeight = totalHeight * 0.7;
+
+            return Center(
+              child: FractionallySizedBox(
+                heightFactor: 1.0,
+                widthFactor: 0.6,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: displayHeight,
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        alignment: Alignment.bottomRight,
+                        child: Text(
+                          '0',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 60,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: buttonHeight,
+                      child: GridView.count(
+                        crossAxisCount: 4,
+                        childAspectRatio: 1,
+                        mainAxisSpacing: 1,
+                        crossAxisSpacing: 1,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: buttons.map((text) {
+                          return Container(
+                            color: (text == '=')
+                                ? Colors.lightBlue
+                                : Colors.grey[850],
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                text,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
